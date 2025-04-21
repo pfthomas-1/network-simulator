@@ -1,0 +1,224 @@
+[gd_scene load_steps=9 format=3 uid="uid://bc4gq71brflk6"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_v56ei"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1if8p"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ruqji"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7oaff"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0nxc8"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jiptx"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dd0vw"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4wa24"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="Node2D"]
+top_level = true
+light_mask = 9
+script = ExtResource("1_v56ei")
+
+[node name="info_page" type="Node2D" parent="."]
+position = Vector2(0, 446)
+
+[node name="info_box" type="Polygon2D" parent="info_page"]
+color = Color(0.471747, 0.491954, 0.479052, 1)
+polygon = PackedVector2Array(0, 0, 256, 0, 256, 200, 0, 200)
+
+[node name="name_label" type="Label" parent="info_page"]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_1if8p")
+
+[node name="info_label" type="Label" parent="info_page"]
+offset_top = 23.0
+offset_right = 256.0
+offset_bottom = 112.0
+label_settings = SubResource("LabelSettings_ruqji")
+
+[node name="toggle_icon" type="Polygon2D" parent="info_page"]
+position = Vector2(208, -2)
+color = Color(0.354854, 0.371756, 0.361626, 1)
+polygon = PackedVector2Array(0, 2, 48, 2, 48, -22, 0, -22)
+
+[node name="toggle_button" type="Button" parent="info_page/toggle_icon"]
+show_behind_parent = true
+offset_top = -22.0
+offset_right = 48.0
+offset_bottom = 2.0
+
+[node name="toggle_lable" type="Label" parent="info_page/toggle_icon"]
+offset_top = -22.0
+offset_right = 48.0
+offset_bottom = 1.0
+text = "Toggle"
+label_settings = SubResource("LabelSettings_7oaff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="escMenu" type="Node2D" parent="."]
+visible = false
+
+[node name="escMenuBackground" type="Polygon2D" parent="escMenu"]
+color = Color(0.843137, 0.807843, 0.764706, 0.419608)
+polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
+
+[node name="quit_icon" type="Polygon2D" parent="escMenu"]
+position = Vector2(576, 324)
+polygon = PackedVector2Array(-64, -32, 64, -32, 64, 32, -64, 32)
+
+[node name="quit_button" type="Button" parent="escMenu/quit_icon"]
+show_behind_parent = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="quitLabel" type="Label" parent="escMenu/quit_icon"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -11.5
+offset_right = 17.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+label_settings = SubResource("LabelSettings_0nxc8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="clear_icon" type="Polygon2D" parent="escMenu"]
+position = Vector2(376, 324)
+polygon = PackedVector2Array(-64, -32, 64, -32, 64, 32, -64, 32)
+
+[node name="clear_button" type="Button" parent="escMenu/clear_icon"]
+show_behind_parent = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="clearLabel" type="Label" parent="escMenu/clear_icon"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -11.5
+offset_right = 17.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Clear Workspace"
+label_settings = SubResource("LabelSettings_0nxc8")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="confirmQuitPopup" type="Polygon2D" parent="escMenu"]
+position = Vector2(480, 292)
+polygon = PackedVector2Array(0, 0, 192, 0, 192, 64, 0, 64)
+
+[node name="confirmQuitLabel" type="Label" parent="escMenu/confirmQuitPopup"]
+offset_left = 40.0
+offset_top = 8.0
+offset_right = 147.0
+offset_bottom = 31.0
+text = "Are You Sure?"
+label_settings = SubResource("LabelSettings_jiptx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="yesQuit" type="Polygon2D" parent="escMenu/confirmQuitPopup"]
+position = Vector2(8, 32)
+color = Color(0.466181, 0.466181, 0.466181, 1)
+polygon = PackedVector2Array(0, 0, 40, 0, 40, 24, 0, 24)
+
+[node name="yesQuitOverlay" type="Polygon2D" parent="escMenu/confirmQuitPopup/yesQuit"]
+position = Vector2(0.6, 0.6)
+scale = Vector2(0.97, 0.95)
+polygon = PackedVector2Array(0, 0, 40, 0, 40, 24, 0, 24)
+
+[node name="yesQuitLabel" type="Label" parent="escMenu/confirmQuitPopup/yesQuit"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Yes"
+label_settings = SubResource("LabelSettings_dd0vw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="yesQuitButton" type="Button" parent="escMenu/confirmQuitPopup/yesQuit"]
+show_behind_parent = true
+offset_right = 40.0
+offset_bottom = 24.0
+
+[node name="noQuit" type="Polygon2D" parent="escMenu/confirmQuitPopup"]
+position = Vector2(144, 32)
+color = Color(0.466181, 0.466181, 0.466181, 1)
+polygon = PackedVector2Array(0, 0, 40, 0, 40, 24, 0, 24)
+
+[node name="noQuitOverlay" type="Polygon2D" parent="escMenu/confirmQuitPopup/noQuit"]
+position = Vector2(0.6, 0.6)
+scale = Vector2(0.97, 0.95)
+polygon = PackedVector2Array(0, 0, 40, 0, 40, 24, 0, 24)
+
+[node name="noQuitLabel" type="Label" parent="escMenu/confirmQuitPopup/noQuit"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "No"
+label_settings = SubResource("LabelSettings_4wa24")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="noQuitButton" type="Button" parent="escMenu/confirmQuitPopup/noQuit"]
+show_behind_parent = true
+offset_right = 40.0
+offset_bottom = 24.0
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 479.0
+offset_right = 673.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Press Escape For Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="info_page/toggle_icon/toggle_button" to="." method="_on_toggle_button_pressed"]
+[connection signal="pressed" from="escMenu/quit_icon/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="escMenu/clear_icon/clear_button" to="." method="_on_clear_button_pressed"]
+[connection signal="pressed" from="escMenu/confirmQuitPopup/yesQuit/yesQuitButton" to="." method="_on_yes_quit_button_pressed"]
+[connection signal="pressed" from="escMenu/confirmQuitPopup/noQuit/noQuitButton" to="." method="_on_no_quit_button_pressed"]

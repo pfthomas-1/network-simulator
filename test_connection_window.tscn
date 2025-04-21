@@ -1,0 +1,111 @@
+[gd_scene load_steps=6 format=3 uid="uid://de7g00ev2mxbf"]
+
+[ext_resource type="Script" path="res://test_connection_window.gd" id="1_n42s4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xu550"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_el6ms"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qkw4y"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ignc7"]
+
+[node name="test_connection_window" type="Node2D"]
+script = ExtResource("1_n42s4")
+
+[node name="window_body" type="Polygon2D" parent="."]
+color = Color(0.470588, 0.490196, 0.478431, 1)
+polygon = PackedVector2Array(0, 0, 310, 0, 310, 100, 0, 100)
+
+[node name="sender_num_input" type="SpinBox" parent="."]
+offset_left = 103.0
+offset_top = 8.0
+offset_right = 186.063
+offset_bottom = 39.0
+min_value = 1.0
+value = 1.0
+prefix = "#"
+
+[node name="receiver_num_input" type="SpinBox" parent="."]
+offset_left = 103.0
+offset_top = 56.0
+offset_right = 186.063
+offset_bottom = 87.0
+min_value = 1.0
+value = 1.0
+prefix = "#"
+
+[node name="check_button_body" type="Polygon2D" parent="."]
+position = Vector2(201, 25)
+color = Color(0.352941, 0.372549, 0.360784, 1)
+polygon = PackedVector2Array(0, 0, 100, 0, 100, 50, 0, 50)
+
+[node name="check_button" type="Button" parent="check_button_body"]
+show_behind_parent = true
+offset_right = 100.0
+offset_bottom = 50.0
+
+[node name="check_label" type="Label" parent="check_button_body"]
+offset_right = 100.0
+offset_bottom = 50.0
+text = "Check Connection"
+label_settings = SubResource("LabelSettings_xu550")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="sender_label" type="Label" parent="."]
+offset_left = -16.0
+offset_top = 11.0
+offset_right = 101.0
+offset_bottom = 34.0
+text = "Sender"
+label_settings = SubResource("LabelSettings_el6ms")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="receiver_label" type="Label" parent="."]
+offset_left = -17.0
+offset_top = 60.0
+offset_right = 104.0
+offset_bottom = 83.0
+text = "Reciever"
+label_settings = SubResource("LabelSettings_el6ms")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="toggle_button_body" type="Polygon2D" parent="."]
+position = Vector2(262, 100)
+color = Color(0.352941, 0.372549, 0.360784, 1)
+polygon = PackedVector2Array(0, 0, 48, 0, 48, 24, 0, 24)
+
+[node name="toggle_label" type="Label" parent="toggle_button_body"]
+offset_right = 48.0
+offset_bottom = 24.0
+text = "Toggle"
+label_settings = SubResource("LabelSettings_qkw4y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="toggle_button" type="Button" parent="toggle_button_body"]
+show_behind_parent = true
+offset_right = 48.0
+offset_bottom = 24.0
+
+[node name="output_label" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 100.0
+offset_right = 224.0
+offset_bottom = 123.0
+label_settings = SubResource("LabelSettings_ignc7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="value_changed" from="sender_num_input" to="." method="_on_sender_num_input_value_changed"]
+[connection signal="value_changed" from="receiver_num_input" to="." method="_on_receiver_num_input_value_changed"]
+[connection signal="pressed" from="check_button_body/check_button" to="." method="_on_check_button_pressed"]
+[connection signal="pressed" from="toggle_button_body/toggle_button" to="." method="_on_toggle_button_pressed"]
