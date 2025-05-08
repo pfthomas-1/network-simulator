@@ -88,7 +88,7 @@ func updateInfoBoxWithComponent(name, connectedCables, connectedComponents):
 		else:
 			otherEnd = "None"
 		
-		info += "Port " + str(i+1) + ": " + cableInSocket + " --> " + str(otherEnd) + "\n"
+		info += "Port " + str(i+1) + ": " + cableInSocket + " --> " + otherEnd + "\n"
 	
 	infoLabel.set_text(info)
 

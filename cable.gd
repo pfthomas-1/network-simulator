@@ -194,7 +194,7 @@ func updateP1ObjConnections():
 		if is_instance_valid(p1obj):
 			p1obj.getOtherEnds()
 
-func updateP2ObjConnections():	
+func updateP2ObjConnections():
 	if typeof(p2obj) != 4:
 		if is_instance_valid(p2obj):
 			p2obj.getOtherEnds()
