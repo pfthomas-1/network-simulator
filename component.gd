@@ -8,6 +8,7 @@ var connectedCables = [] # keeps track of which cables are connected to this com
 var connectedPlugs = [] # keeps track of which plugs cables are connected to
 var connectedCableNames = [] # used for cables
 var connectedComponents = [] # what each connected cable leads to
+var connectedComponentNames = [] # used for code tracing
 var canConnect = true
 var maxConnections; # Assigned upon instantiation 3 for hosts, 6 for routers
 
@@ -96,25 +97,56 @@ func emptyPortOf(element):
 	connectedCableNames[index] = "None"
 	connectedComponents[index] = "None"
 	canConnect = true
+	
+	print("======== emptyPortOf(element) ========")
+	print("Called by: ", name)
+	print("element: ", element)
+	print("index: ", index)
+	print("connectedCables: ", connectedCables)
+	print("connectedPlugs: ", connectedPlugs)
+	print("connectedCableNames: ", connectedCableNames)
+	print("connectedComponents: ", connectedComponents)
+	print()
 
 
 func fillPortWith(cable, plug):
-	for i in range(0, connectedCables.size()):
-		if typeof(connectedCables[i]) == 4: # upon finding a string 
-			connectedCables[i] = cable
-			connectedPlugs[i] = plug
-			connectedCableNames[i] = cable.name
-			break
+	print("======== fillPortWith(cable, plug) ========")
+	print("Called by: ", name)
+	print("calls self's findFirstEmptyPort()")
+	print()
+	
+	var portNumber = findFirstEmptyPort()
+	connectedCables[portNumber] = cable
+	connectedPlugs[portNumber] = plug
+	connectedCableNames[portNumber] = cable.name
 
 
 func checkPorts() -> bool:
-	for i in range(0, connectedCables.size()):
-		if typeof(connectedCables[i]) == 4: # upon finding a string
-			return true
-	return false
+	print("======== checkPorts() ========")
+	print("called by: ", self.name)
+	print("calls self's findFirstEmptyPort()")
+	print()
+	
+	return findFirstEmptyPort() != -1
 
+func findFirstEmptyPort() -> int:
+	print("======== findFirstEmptyPort() ========")
+	print("Called by: ", name)
+	
+	for i in range(0, connectedCables.size()):
+		if typeof(connectedCables[i]) == 4: # upon finding a string (empty port)
+			print("First empty port: ", str(i), "\n")
+			return i
+	
+	print("No empty port\n")
+	return -1
 
 func checkTableFor(receiver): # returns true if the receiver is in this components connectedComponents array
+	print("======== checkTableFor(receiver) ========")
+	print("Called by: ", self.name)
+	print("receiver: ", receiver)
+	print()
+	
 	Global.checkedComponents.append(self)
 	
 	if connectedComponents.find(receiver) != -1:
@@ -132,10 +164,15 @@ func checkTableFor(receiver): # returns true if the receiver is in this componen
 
 
 func checkForConnections() -> bool: # returns true upon finding something in the connectedComponents array that isn't a String
+	print("======== checkForConnections() ========")
+	print("Called by: ", self.name)
+	
 	for component in connectedComponents:
 		if typeof(component) != 4: 
+			print("Connected to components? True\n")
 			return true
 	
+	print("Connected to components? False\n")
 	return false
 
 
@@ -151,10 +188,20 @@ func getOtherEnds():
 			connectedComponents[port] = cable.p2obj
 		elif connectedPlugs[port] == "2":
 			connectedComponents[port] = cable.p1obj
+	
+	print("======== getOtherEnds() ========")
+	print("Called by: ", self.name)
+	print("connectedCables: ", connectedCables)
+	print("connectedComponents: ", connectedComponents)
+	print("connectedPlugs: ", connectedPlugs)
+	print()
 
 
 func delete():
-	componentNotTouchingMouse.emit(name)
+	print("======== delete() ========")
 	print(name, " thrown away")
+	print()
+	
+	componentNotTouchingMouse.emit(name)
 	componentDeleted.emit(number)
 	queue_free()

@@ -47,12 +47,12 @@ func _process(delta: float) -> void:
 		$plug2.rotate(PI/2)
 		plug2FollowConnection()	
 	
-	if !is_instance_valid(p1obj): # handles disconnecting cable from a component that gets deleted
+	if !is_instance_valid(p1obj) and typeof(p1obj) != 4: # handles disconnecting cable from a component that gets deleted
 		p1obj = "None"
 		plug1Connected = false
 		updateP2ObjConnections() 
 	
-	if !is_instance_valid(p2obj): # handles disconnecting cable from a component that gets deleted
+	if !is_instance_valid(p2obj) and typeof(p2obj) != 4: # handles disconnecting cable from a component that gets deleted
 		p2obj = "None"
 		plug2Connected = false
 		updateP1ObjConnections()
@@ -184,17 +184,34 @@ func _on_plug_2_area_2d_mouse_exited() -> void:
 
 
 func delete():
+	print("======== delete() ========")
+	print(name, " thrown away")
+	print()
+	
 	cableNotTouchingMouse.emit(name)
 	cableDeleted.emit(number)
-	print(name, " thrown away")
 	queue_free()
 
 func updateP1ObjConnections():
-	if typeof(p1obj) != 4:
-		if is_instance_valid(p1obj):
-			p1obj.getOtherEnds()
+	print("======== updateP1ObjConnections() ========")
+	print("Called by: ", name)
+	print("Calls p1obj's getOtherEnds() if p1obj is a valid object")
+	print()
+	
+	if typeof(p1obj) != 4 and is_instance_valid(p1obj):
+		print("p1obj is a valid object\n")
+		p1obj.getOtherEnds()
+	else:
+		print("p1obj is not a valid object\n")
+
 
 func updateP2ObjConnections():
-	if typeof(p2obj) != 4:
-		if is_instance_valid(p2obj):
-			p2obj.getOtherEnds()
+	print("======== updateP2ObjConnections() ========")
+	print("Called by: ", name)
+	print("Calls p2obj's getOtherEnds() if p2obj is a valid object")
+	
+	if typeof(p2obj) != 4 and is_instance_valid(p2obj):
+		print("p2obj is a valid object\n")
+		p2obj.getOtherEnds()
+	else:
+		print("p2obj is not a valid object\n")

@@ -167,16 +167,25 @@ func deleteAll():
 	routerNumArray = [0]
 
 func isConnectionTestValid(senderNum, receiverNum):
+	print("======== isConnectionTestValid(senderNum, receiverNum) ========")
+	
 	if hostNumArray.find(int(senderNum)) != -1 and hostNumArray.find(int(receiverNum)) != -1: # if both sender and receiver exist
-		print("hosts ", senderNum, " and ", receiverNum, " exist")
+		print("hosts ", senderNum, " and ", receiverNum, " exist\n")
 		return true
 	else:
-		print("INVALID TEST! sender and/or receiver does not exist")
+		print("INVALID TEST! sender and/or receiver does not exist\n")
 		return false
 
 func findRoute(senderNum, recieverNum):
+	print("======== findRoute(senderNum, recieverNum) ========")
+	print("Called by: ", name)
+	print("senderNum: ", senderNum)
+	print("recieverNum: ", recieverNum)
+	
 	Global.checkedComponents = [] # reset the array
 	Global.isRouteFound = false;
+	
+	print("\nCalls self's isConnectionTestValid(senderNum, recieverNum)\n")
 	
 	if !isConnectionTestValid(senderNum, recieverNum): # can't connect hosts that don't exist
 		connectionTester.outputLabel.label_settings.font_color = red
@@ -200,6 +209,7 @@ func findRoute(senderNum, recieverNum):
 		return
 	
 	# 2. check if the sender and receiver are connected to anything in the first place
+	print("\nCalls sender's and receiver's checkForConnections()\n")
 	if !sender.checkForConnections() or !receiver.checkForConnections():
 		print("No route found - Sender or Receiver has no connections")
 		connectionTester.outputLabel.label_settings.font_color = red
@@ -210,6 +220,7 @@ func findRoute(senderNum, recieverNum):
 	# 4. if not, ask every component the sender is connected to if they are the reciever
 	# 5. if not, tell them to do the same
 	# 6. repeat until a route is found or we run out of routes
+	print("Calls sender's checkTableFor(receiver)\n")
 	sender.checkTableFor(receiver)
 	
 	if Global.isRouteFound:
@@ -219,7 +230,7 @@ func findRoute(senderNum, recieverNum):
 		return
 	
 	# 7. if no route is found, say something
-	print("No route found!")
+	print("No route found!\n")
 	connectionTester.outputLabel.label_settings.font_color = red
 	connectionTester.outputLabel.set_text("No Route Found")
 	return
