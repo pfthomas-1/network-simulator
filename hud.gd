@@ -83,12 +83,12 @@ func updateInfoBoxWithComponent(name, connectedCables, connectedComponents):
 		else:
 			cableInSocket = connectedCables[i].name
 		
-		if typeof(otherEnd) != 4 and typeof(connectedCables[i].p2obj) != 4: # if plug 1 is connected and the other end isn't empty
+		if typeof(otherEnd) != 4 and typeof(connectedComponents[i]) != 4: # if plug 1 is connected and the other end isn't empty
 			otherEnd = connectedComponents[i].name
 		else:
 			otherEnd = "None"
 		
-		info += "Port " + str(i+1) + ": " + cableInSocket + " --> " + otherEnd + "\n"
+		info += "Port " + str(i+1) + ": " + cableInSocket + " --> " + str(otherEnd) + "\n"
 	
 	infoLabel.set_text(info)
 

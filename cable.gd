@@ -191,8 +191,10 @@ func delete():
 
 func updateP1ObjConnections():
 	if typeof(p1obj) != 4:
-		p1obj.getOtherEnds()
+		if is_instance_valid(p1obj):
+			p1obj.getOtherEnds()
 
-func updateP2ObjConnections():
+func updateP2ObjConnections():	
 	if typeof(p2obj) != 4:
-		p2obj.getOtherEnds()
+		if is_instance_valid(p2obj):
+			p2obj.getOtherEnds()
