@@ -62,6 +62,12 @@ func _on_hostButton_pressed() -> void:
 	host.get_child(0).get_child(0).add_to_group("hosts") # first get_child(0) is Sprite2D, the second is Area2D, which is what we want to add to the group
 	add_child(host)
 	
+	var sprite = host.get_child(0)
+	
+	sprite.texture = load("res://sprites/Host.png")
+	sprite.scale = Vector2(2.75,2.75)
+	sprite.get_child(0).scale = Vector2(.4,.4)
+	
 	host.componentTouchingMouse.connect(printComponentInfo)
 	host.componentNotTouchingMouse.connect(clearInfoBox)
 	host.componentDeleted.connect(removeHost) # Allows  removeHost(number) to remove a number from the array when the host of that number is deleted
@@ -107,7 +113,12 @@ func _on_router_button_pressed() -> void:
 	router.maxConnections = 6
 	router.position = get_random_pos() # place the component in a random spot on the screen
 	router.get_child(0).get_child(0).add_to_group("routers") # first get_child(0) is Sprite2D, the second is Area2D, which is what we want to add to the group
-	router.get_child(0).self_modulate = Color(0, 0, 1, 1) # change the router's color to differentiate from hosts (temporary)
+	
+	var sprite = router.get_child(0)
+	
+	sprite.texture = load("res://sprites/Router.png")
+	sprite.scale = Vector2(1,1)
+	sprite.get_child(0).scale = Vector2(.8,.8)
 	add_child(router)
 	
 	router.componentTouchingMouse.connect(printComponentInfo)

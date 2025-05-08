@@ -17,7 +17,6 @@ signal componentDeleted
 
 func _ready():
 	$Sprite2D/Area2D.monitoring = true
-	$Label.set_text(name.get_slice(" ", 1))
 	for i in range(0, maxConnections):
 		connectedCables.append("None")
 		connectedPlugs.append("None")

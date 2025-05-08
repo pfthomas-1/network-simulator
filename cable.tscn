@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://pxiyat8003a4"]
 
-[ext_resource type="Texture2D" uid="uid://cc3rtuds6kj1s" path="res://icon.svg" id="1_12vyi"]
 [ext_resource type="Script" path="res://cable.gd" id="1_slf8d"]
+[ext_resource type="Texture2D" uid="uid://dom2e1i6283xf" path="res://sprites/plug.png" id="2_44r41"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awmhr"]
-size = Vector2(130, 130)
+size = Vector2(12, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kobgt"]
-size = Vector2(130, 130)
+size = Vector2(12, 18)
 
 [node name="cable" type="Node2D" groups=["cables"]]
 script = ExtResource("1_slf8d")
@@ -15,23 +15,20 @@ script = ExtResource("1_slf8d")
 [node name="cableCord" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
 width = 3.0
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0.356863, 0.501961, 1, 1)
 
 [node name="plug1" type="Sprite2D" parent="."]
 position = Vector2(-30, 0)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_12vyi")
+texture = ExtResource("2_44r41")
 
 [node name="Area2D" type="Area2D" parent="plug1"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="plug1/Area2D"]
-position = Vector2(-7.15256e-06, -7.15256e-06)
 shape = SubResource("RectangleShape2D_awmhr")
 
 [node name="plug2" type="Sprite2D" parent="."]
 position = Vector2(30, 0)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_12vyi")
+texture = ExtResource("2_44r41")
 
 [node name="Area2D" type="Area2D" parent="plug2"]
 

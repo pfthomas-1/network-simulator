@@ -5,7 +5,6 @@ var connectionWindowEnabled = true
 
 @onready var senderNumInput = $sender_num_input
 @onready var receiverNumInput = $receiver_num_input
-@onready var connectionWindow = $test_connection_window
 @onready var outputLabel= $output_label
 
 signal checkConnectionBetween

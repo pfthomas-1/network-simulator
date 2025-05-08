@@ -2,6 +2,7 @@ extends Node2D
 
 var plug1Selected = false
 var plug2Selected = false
+var rotationOffset = 90
 
 var number = 0
 
@@ -36,21 +37,25 @@ func _process(delta: float) -> void:
 		plug1FollowMouse()
 	elif plug1Connected and is_instance_valid(p1obj):
 		$plug1.look_at(p1obj.global_position)
+		$plug1.rotate(PI/2)
 		plug1FollowConnection()
 	
 	if plug2Selected:
 		plug2FollowMouse()
 	elif plug2Connected  and is_instance_valid(p2obj):
 		$plug2.look_at(p2obj.global_position)
+		$plug2.rotate(PI/2)
 		plug2FollowConnection()	
 	
 	if !is_instance_valid(p1obj): # handles disconnecting cable from a component that gets deleted
 		p1obj = "None"
 		plug1Connected = false
+		updateP2ObjConnections() 
 	
 	if !is_instance_valid(p2obj): # handles disconnecting cable from a component that gets deleted
 		p2obj = "None"
 		plug2Connected = false
+		updateP1ObjConnections()
 	
 	if touchingTrashCan and (!plug1Selected and !plug2Selected) and (!plug1Connected and !plug2Connected):
 		delete()
@@ -84,11 +89,11 @@ func plug2FollowConnection():
 
 func p1LookAway():
 	$plug1.look_at($plug2.global_position)
-	$plug1.rotate(PI)
+	$plug1.rotate(3 * PI / 2)
 
 func p2LookAway():
 	$plug2.look_at($plug1.global_position)
-	$plug2.rotate(PI)
+	$plug2.rotate(3 * PI / 2)
 
 func _on_plug_1_area_2d_area_entered(area: Area2D) -> void:
 	if (area.is_in_group("hosts") or area.is_in_group("routers")) and plug1Selected and str(area.owner) != str(p2obj):
